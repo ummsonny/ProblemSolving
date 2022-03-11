@@ -8,7 +8,7 @@ count=0 # 현재 그룹에 포함된 모험가 수
 
 for i in array:
     count+=1
-    if count>=i:
+    if count>=i: # 사람 수 >= 공포도
         result+=1
         count=0
 

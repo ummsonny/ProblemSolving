@@ -12,7 +12,7 @@ def solution(food_times, k):
         heapq.heappush(q, (food_times[i], i + 1))  
 
     sum_value = 0 # 먹기 위해 사용한 시간
-    previous = 0 # 직전에 다 먹은 음식 시간
+    previous = 0 # 직전에 다 먹은 특정 음식 시간
     length = len(food_times) # 남은 음식의 개수
 
 
