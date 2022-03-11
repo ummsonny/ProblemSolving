@@ -22,5 +22,3 @@ while len(heap) != 1:
     heapq.heappush(heap, sum_value)
 
 print(result)
-
-print(result)
