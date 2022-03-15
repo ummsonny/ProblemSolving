@@ -1,7 +1,4 @@
-from tabnanny import check
-
-
-def balanced_index(p):
+def balanced_index(p): # 균형잡힌 문자열의 인덱스 반환
     count = 0 #왼쪽 괄호의 개수
     for i in range(len(p)):
         if p[i] == '(':
@@ -12,19 +9,20 @@ def balanced_index(p):
         if count == 0:
             return i
 
-def check_proper(p):
+def check_proper(p): # 올바른 문자열
     count = 0 # 왼쪽 괄호의 개수
     for i in p:
         if p == '(':
             count +=1
         else:
-            if count == 0:
+            if count == 0: # 남는 '('가 없자나 그래서 짝을 못 지음
                 return False
             count -=1
     return True
 
-def solution(p):
-    answer = ""
+def solution(p): #균잡 -> 올바른 으로 바꾸는 함수임을 기억!
+    answer = "" # return 할 값
+
     if p== "":
         return answer
 

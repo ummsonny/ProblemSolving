@@ -33,7 +33,7 @@ def get_score(): # 안전한 장소 찾기
 def dfs(count): # 내가 이전에 생각한 dfs랑 좀 다른 유형의 dfs **********
     global result
 
-    if count == 3: # dfs가 무한대로 깊어지지 않기 위한 조건문
+    if count == 3: # dfs가 무한대로 깊어지지 않기 위한 조건문 벽 3개만 설치
         for i in range(n):
             for j in range(m):
                 temp[i][j] = data[i][j]
