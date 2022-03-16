@@ -1,5 +1,4 @@
 from itertools import combinations
-from tkinter import W
 
 n = int(input())
 board = []

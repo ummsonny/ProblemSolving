@@ -10,13 +10,14 @@ for _ in range(n):
 dx = [-1, 0, 1, 0]
 dy = [0, -1, 0, 1]
 
-def process(x, y, index):
+def process(x, y, index): #bfs
     united = []
     united.append((x,y))
 
     q = deque()
     q.append((x,y))
     union[x][y] = index # 현재 연합 번호 할당
+
     summary = graph[x][y] # 현재 연합 인구수
     count = 1
 
@@ -30,7 +31,9 @@ def process(x, y, index):
             if 0<=nx<n  and 0<=ny<n and union[nx][ny]==-1:
                 if l<=abs(graph[x][y]-graph[nx][ny]) <= r:
                     q.append((nx,ny))
+
                     union[nx][ny]=index
+
                     summary+=graph[nx][ny]
                     count+=1
                     united.append((nx,ny))
