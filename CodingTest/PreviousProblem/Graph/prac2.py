@@ -31,4 +31,4 @@ for _ in range(p):
 
 print(result)
 
-#루트에다가 도킹!
+# **현재** 루트에다가 도킹!
