@@ -49,7 +49,7 @@ def simulate():
                 data[nx][ny]=2
                 q.append((nx,ny))
 
-        else:
+        else: # 벽 부딫히거나 자기 몸이랑 만남
             time+=1
             break
 
