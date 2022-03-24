@@ -21,6 +21,7 @@
 - 가끔씩 문제조건 혹은 관례상으로 작은 번호부터 처리(하지만 순서상관없음)
 ### 시간 복잡도
 - 데이터 개수가 N이라면 O(N)
+### 기본 코드
 ```python
 # 연결리스트 방법
 def dfs(graph, v, visited):
@@ -58,6 +59,7 @@ def dfs(graph, x,y, visited): # visited말고 graph상에 바로 표현해도 �
 ### 시간복잡도
 - 데이터 개수가 N이라면 O(N)
 - <span style = "color:red">일반적인 경우 실제 수행시간은 DFS보다 좋다. </span> -> 코테에서도 BFS를 먼저 고려하자
+### 기본 코드
 ```python
 #연결 리스트 방법
 from collections import deque
