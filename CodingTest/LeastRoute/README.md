@@ -127,7 +127,7 @@ for k in range(1, n + 1):
 for a in range(1, n + 1):
     for b in range(1, n + 1):
         # 도달할 수 없는 경우, 무한(INFINITY)이라고 출력
-        if graph[a][b] == 1e9:
+        if graph[a][b] == INF:
             print("INFINITY", end=" ")
         # 도달할 수 있는 경우 거리를 출력
         else:
