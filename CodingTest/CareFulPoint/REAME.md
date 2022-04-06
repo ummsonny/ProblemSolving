@@ -7,8 +7,8 @@ dx = [0, 0, -1, 1]
 dy = [-1, 1, 0, 0]
 
 for i in range(4):
-    nx = x + step[i]
-    ny = y + step[i]
+    nx = x + dx[i]
+    ny = y + dy[i]
 ``` 
 2. 
 ```python
