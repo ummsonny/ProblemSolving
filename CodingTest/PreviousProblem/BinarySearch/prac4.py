@@ -1,5 +1,4 @@
 from bisect import bisect_left, bisect_right
-from dataclasses import dataclass
 
 def count_by_range(a, left_value, right_value):
     left_index = bisect_left(a, left_value)
