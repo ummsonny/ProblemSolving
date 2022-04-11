@@ -1,7 +1,7 @@
 from collections import deque
 
 n, m, k, x = map(int, input().split())
-graph = [[] for _ in range(n+1)]
+graph = [[] for _ in range(n+1)] # n+1 조심
 
 for i in range(n):
     a,b = map(int, input().split())
