@@ -1,36 +1,21 @@
-from collections import deque
+'''
+파이썬은 함수 안에만 지역변수임 while이나 for문에서는 global변수쓰는거임 
+'''
+x=2
+while True: 
 
-n, k = map(int, input().split())
-dx = [-1,0,1,0]
-dy = [0,1,0,-1]
+    #node, s, x, y = (1,1,1,1)
+    x =1
+    break
 
-graph = []
-virus = []
-for i in range(n):
-    graph.append(list(map(int, input().split())))
-    for j in range(n):
-        if graph[i][j] != 0:
-            virus.append((graph[i][j],0, i, j))
+print(x)
 
-second, x1, y1 = map(int, input().split())
+a = 10  # 전역변수
+def func(): 
+    a = 20 # 지역변수 
+    print(f"2. {a}") 
+    return a + 100 # 여기서의 a는 바로위 지역변수 a
 
-virus.sort()
-q = deque(virus)
-
-while q:
-
-    node, s, x, y = q.popleft()
-    if s == second:
-        break
-
-    for i in range(4):
-        nx = x + dx[i]
-        ny = y + dy[i]
-
-        if 0<=nx<n and 0<=ny<n:
-            if graph[nx][ny] == 0:
-                graph[nx][ny] = node
-                q.append((graph[nx][ny], s+1, nx, ny))
-print(graph, x1, y1)
-print(graph[x1-1][y1-1])
+print(f"1. {a}") 
+print(f"3. {func()}") # func() 함수가 호출되고 끝나면 func() 내부 지역변수가 살았다가 사라짐
 
