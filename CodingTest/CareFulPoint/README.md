@@ -61,3 +61,45 @@ print(f"3. {func()}") # func() 함수가 호출되고 끝나면 func() 내부 �
 ```
 - **리스트**는 global선언 없이 **함수** 안에서 접근 및 수정 등이 가능함
     - 어떤 deepcopy()처럼 전체를 **재할당** 할때에는 global선언 해줘야함
+
+---
+## 재귀함수
+- 재귀함수 안에서 불필요한 연산하지말자! 만약 재귀함 수 밖에서 할 수 있다면 밖에서 하자 -> 시간초과 우려가 있다.
+
+```python
+# 불필요한 연산
+def dfs(x,y,united):
+    global people, country
+
+    visited[x][y]=1
+    united.append((x,y))
+
+    people += graph[x][y]# ***
+    country +=1# ***
+
+
+    for i in range(4):
+        nx = x + dx[i]
+        ny = y + dy[i]
+
+        if 0<=nx<n and 0<=ny<n and visited[nx][ny]==0:
+            if l<=abs(graph[x][y]-graph[nx][ny])<=r:
+
+                dfs(nx,ny,united)
+
+# 권장
+def dfs(x,y,united):
+
+    visited[x][y]=1
+    united.append((x,y))
+
+    for i in range(4):
+        nx = x + dx[i]
+        ny = y + dy[i]
+
+        if 0<=nx<n and 0<=ny<n and visited[nx][ny]==0:
+            if l<=abs(graph[x][y]-graph[nx][ny])<=r:
+
+                dfs(nx,ny,united)
+
+```

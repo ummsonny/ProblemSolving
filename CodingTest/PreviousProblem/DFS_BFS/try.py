@@ -1,80 +1,56 @@
-from cgi import test
-import copy
-n = int(input())
-
+import sys
+sys.setrecursionlimit(10000)
+n, l, r = map(int, input().split())
 graph = []
-teachers = []
+for _ in range(n):
+    graph.append(list(map(int, input().split())))
+dx = [-1,0,1,0]
+dy = [0,1,0,-1]
 
-for i in range(n):
-    graph.append(list(input().split()))
-    for j in range(n):
-        if graph[i][j] == 'T':
-            teachers.append((i,j))
-# 조합 문제임
+def dfs(x,y,united):
 
-def check():
-    
-    for teacher in teachers:
-        #왼쪽 방향 보자!
-        x,y = teacher
-        while y>=0:
-            if graph[x][y]=='S':
-                return True
-            elif graph[x][y]=='O':
-                break
-            y-=1
-            
-        #위쪽 방향 보자!
-        x,y = teacher
-        while x>=0:
-            if graph[x][y]=='S':
-                return True
-            elif graph[x][y]=='O':
-                break
-            x-=1
+    visited[x][y]=1
+    united.append((x,y))
 
-        #오른쪽 방향 보자!
-        x,y = teacher
-        while y<n:
-            if graph[x][y]=='S':
-                return True
-            elif graph[x][y]=='O':
-                break
-            y+=1
+    for i in range(4):
+        nx = x + dx[i]
+        ny = y + dy[i]
 
-        #아래쪽 방향 보자!
-        x,y = teacher
-        while x<n:
-            if graph[x][y]=='S':
-                return True
-            elif graph[x][y]=='O':
-                break
-            x+=1
+        if 0<=nx<n and 0<=ny<n and visited[nx][ny]==0:
+            if l<=abs(graph[x][y]-graph[nx][ny])<=r:
 
-    return False # 
+                dfs(nx,ny,united)                
 
+people, country= 0,0
+united = []
+count = 0
+while True:
+    visited = [[0]*n for _ in range(n)]
 
-
-find = True
-
-def dfs(count):
-    global find
-
-    if count == 3:
-        if not check(): #학생 안걸림
-            find = False
-        return
-    
+    result = 0
+    #flag = False
+    count +=1
     for i in range(n):
         for j in range(n):
-            if graph[i][j] == 'X':
-                graph[i][j] = 'O'
-                dfs(count+1)
-                graph[i][j] = 'X'
+            if not visited[i][j]:#==0:
+                dfs(i,j,united)
+            if len(united) > 1:
+                result +=1
+                #flag=True
+                summary = 0
+                for node in united:
+                   summary+=graph[node[0]][node[1]]
 
-dfs(0)
+                length = len(united)
+                avg = summary//length
+                for a,b in united:
+                    graph[a][b] = avg
 
-if find:
-    print('NO')
-else:
-    print('YES')
+            people, country= 0,0
+            united=[]
+    
+    if result == n*n:
+    #if not flag:
+        break
+
+print(count-1)
