@@ -3,3 +3,4 @@
 # 3. [BFS_DFS](https://github.com/ummsonny/ProblemSolving/tree/master/CodingTest/DFS_BFS)
 # 6. [DP](https://github.com/ummsonny/ProblemSolving/tree/master/CodingTest/DP)
 # 7. [LeastRoute](https://github.com/ummsonny/ProblemSolving/tree/master/CodingTest/LeastRoute)
+# 9. [Tip](https://github.com/ummsonny/ProblemSolving/tree/master/CodingTest/CareFulPoint)
