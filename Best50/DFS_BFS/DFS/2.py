@@ -22,8 +22,8 @@ def dfs(x,y):
             if visit[nx][ny]==-1:
                 dfs(nx,ny)
 
-max_answer = 1 #어떤 경우든 비가 안 올 경우를 고려해야하므로 안전한 영역의 최대 개수 >=1
-for i in range(1,101):
+max_answer = -1 
+for i in range(0,101): #어떤 경우든 비가 안 올 경우를 고려해야 => 0
 
     visit = [[-1]*n for _ in range(n)]
     count = 0
