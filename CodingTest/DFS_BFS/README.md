@@ -48,7 +48,6 @@ def dfs(graph, x,y, visited): # visited말고 graph상에 바로 표현해도 �
         nx = x + dx[i]
         ny = y + dy[i]
         if 0<=nx<n and 0<=ny<n and "장애물이 아니라면":
-            # 해당 노드를 처음 방문하는 경우에만 최단 거리 기록 중요***********
             if graph[nx][ny] == 1:
                 dfs(graph, x, y, visited)
 ```
@@ -73,7 +72,6 @@ from collections import deque
 def bfs(graph, start, visited):
     
     queue = deque([start])
-
     visited[start]=True
 
     while queue:
@@ -116,3 +114,20 @@ def bfs(x, y):
     - 2차원 배열에서의 탐색 문제 -> 전형적인 그래프 형태로 바꿔서 생각!
     - 리스트는 너무 힘들다. 행렬로 가능
 - **코테에서 탐색 문제 만나면 전형적인 그래프 형태로 표현한 다음 풀이!**
+
+---
+
+## 실전 문제 풀이 팁
+### DFS&BFS 공통점
+- 확장 상태(노드)의 후보를 만들어라 
+- visited가 있어야 한다.
+    - 똑같은 상황이 존재하지 않는다면 visited가 없어도 된다. 하지만 대부분이 있다.
+### DFS&BFS 차이점
+- DFS
+    - 종료 조건
+    - 상황 복구 방법
+        1. 특정 상태(노드)의 상황을 담고 있어야 다시 돌아왔을때 상황이 같다. 즉 나만의 상태가 필요하다!
+    그래서 매개변수로 넘겨준다. 그리고 그 매개변수를 담을 지역변수가 존재한다.
+        2.  dfs후에 복구 시키는 코드 넣는다.
+- BFS
+    - 상태(노드)의 최단 거리를 구할 수 있다.
