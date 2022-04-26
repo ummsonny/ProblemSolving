@@ -37,6 +37,12 @@ array = listmap(int, input().split()))
 list(map(lambda x:'(' if x==')' else ')',p[1:i]))
 ```
 
+2. 요소가 배열인 2차원 배열 선언
+```python
+1. graph = [[[]]*n for _ in range(n)] --> 이건 요소의 주소값이 복사되어서 갱신 되면 한 행이 다 갱신 되므로 주의!!! 나중에 요소값 초기화 할때 ex) graph[i][j] = [1,3]처럼 배열로 초기화 해야함
+2. graph = [[[] for _ in range(n)] for _ in range(n)]
+```
+
 ---
 ## 변수의 범위
 - 파이썬은 **함수** 안에만 지역변수임 **while이나 for문**에서는 global변수쓰는거임
@@ -103,3 +109,30 @@ def dfs(x,y,united):
                 dfs(nx,ny,united)
 
 ```
+
+---
+## 배열 회전하기
+
+- 시계방향 90도회전
+```python
+def right_rot90(a):#시계방향 90도 회전
+    n = len(a) # 행
+    m - len(a[0]) # 열
+    new_a = [[0]*n for _ in range(m)]
+    for i in range(n):
+        for j in range(m):
+            new_a[j][n-1-i] = a[i][j]
+    return new_a
+```
+- 반시계방향 90도 회전
+```python
+def left_rot90(a):#반시계방향 90도 회전
+    n = len(a) # 행
+    m - len(a[0]) # 열
+    new_a = [[0]*n for _ in range(m)]
+    for i in range(n):
+        for j in range(m):
+            new_a[m-1-j][i] = a[i][j]
+    return new_a
+```
+

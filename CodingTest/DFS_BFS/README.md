@@ -89,6 +89,7 @@ def bfs(x, y):
 
     queue = deque()
     queue.append((x, y))
+    visit[x][y] = True
 
     while queue:
         x, y = queue.popleft()
@@ -99,7 +100,7 @@ def bfs(x, y):
             # 미로 찾기 공간을 벗어난 경우 X and 장애물 X 라면
             if 0<=nx<n and 0<=ny<n and "장애물이 아니라면":
                 # 해당 노드를 처음 방문하는 경우에만 최단 거리 기록 중요***********
-                if graph[nx][ny] == 1:
+                if visit[nx][ny] == False: # graph[nx][ny] == 1:도 가능
                     graph[nx][ny] = graph[x][y] + 1 # 방문체크도 동시에 된다.
                     queue.append((nx, ny))
     # 가장 오른쪽 아래까지의 최단 거리 반환
@@ -131,3 +132,53 @@ def bfs(x, y):
         2.  dfs후에 복구 시키는 코드 넣는다.
 - BFS
     - 상태(노드)의 최단 거리를 구할 수 있다.
+
+---
+## 유형별 풀이 팁
+
+### 조합
+
+- 1차원
+
+```python
+
+#Best50/Samsung/DFS_BFS/15686.py 및 Best50/Samsung/BruteForce_Backtracking/3.py 참고
+def dfs(count, start):
+
+    if count == 원하는 개수:
+        #다 뽑았으면 여기서 처리
+        return
+
+
+    for i in range(start, length):
+        
+        #선택코드
+        dfs(count+1, i+1) # 여기가 핵심 !!!! 조합!!!!!! start가아니라 i가 들어가야함
+        #선택한거 원상보구 코드
+```
+
+- 2차원
+
+```python
+
+# Best50/DFS_BFS/BFS/3.py
+
+def dfs(sx,sy,count):
+
+    if count == 원하는 개수:
+        # 후보 선택후에 처리코드
+        return
+
+    for a in range(sx,n): # 이차원 조합 
+        sy = sy if a == sx else 0
+
+        for b in range(sy,m):
+            
+            if graph[a][b]==0:
+                graph[a][b]=1
+                dfs(sx,sy+1,count+1)
+                graph[a][b]=0
+
+
+
+```
