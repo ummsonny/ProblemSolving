@@ -88,7 +88,7 @@ for _ in range(s):
     move_fish()
     #밑에 세줄은 함수 들어갈때마다 초기화 해줘야하므로 여기 있어야 한다.
     ate_fishes = []
-    max_ate = -1 #0으로 하면 틀린다. 왜냐면 아예 먹을 물고기가 없을 수도 있으니까. 그래서 항상 최대값구할때 음수로 해라
+    max_ate = -1  # 일단 해보자
     max_ate_fishes = []
 
     visit = [[0] * 4 for _ in range(4)]
