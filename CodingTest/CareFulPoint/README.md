@@ -136,3 +136,6 @@ def left_rot90(a):#반시계방향 90도 회전
     return new_a
 ```
 
+---
+## List, Set, Dict 자료형에 따른 시간 복잡도!
+### [Reference](https://2dowon.netlify.app/python/data-type-big-o/) 꼭 참고해라!
