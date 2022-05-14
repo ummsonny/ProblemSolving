@@ -2,7 +2,7 @@ from collections import deque
 from copy import deepcopy
 
 m,s = map(int, input().split())
-#물고기(유뮤,방향) 및 상어
+#물고기(방향) 및 상어
 graph = [[[] for _ in range(4)] for _ in range(4)]
 #물고기 냄새 초!
 smell = [[0]*4 for _ in range(4)]
@@ -92,7 +92,7 @@ for _ in range(s):
     max_ate_fishes = []
 
     visit = [[0] * 4 for _ in range(4)]
-    #visit[sx][sy] = 1 이거 해도되고 안해도 됨 왜냐면 '상하중','하상중',... 즉, 모든 경우에 3번만에 상어가 다시 출발지점으로 돌아오는 일은 없기때문이다.
+    #visit[sx][sy] = 1 이거 해도되고 안해도 됨 -->?(확실치않음) 왜냐면 '상하좌','하상좌',... 즉, 모든 경우에 3번만에 상어가 다시 출발지점으로 돌아오는 일은 없기때문이다.
     move_shark(sx,sy,0)
 
     remove_fish()
