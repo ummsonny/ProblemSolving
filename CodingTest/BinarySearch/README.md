@@ -68,6 +68,25 @@ def binary_search(array, target, start, end):
 
 # 밑에는 재귀와 동일
 ```
+3. bisect 모듈(이진 탐색 라이브러리)
+```python
+from bisect import bisect_left, bisect_right
+
+def count_by_value(array, left_value, right_value):
+    right_index = bisect_right(array, right_value)
+    left_index = bisect_left(array, left_value)
+    return right_index-left_index
+    
+n, x = map(int, input().split())
+array = list(map(int, input().split()))
+
+count = count_by_value(array, x, x)
+
+if count == 0:
+    print(-1)
+else:
+    print(count)
+```
 ### when?
 - 코테에서 이진 탐색은 탐색 범위가 큰 상황에서 사용
 1. 탐색 범위가 **2000만**을 넘어가면 이진 탐색으로 접근!
