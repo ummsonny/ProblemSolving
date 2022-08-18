@@ -1,7 +1,7 @@
 # 1. [Greedy](https://github.com/ummsonny/ProblemSolving/tree/master/CodingTest/Greedy)
 # 2. [Implementation](https://github.com/ummsonny/ProblemSolving/tree/master/CodingTest/Implementation)
 # 3. [BFS_DFS](https://github.com/ummsonny/ProblemSolving/tree/master/CodingTest/DFS_BFS)
-# 4. [BinarySearch](https://github.com/ummsonny/ProblemSolving/tree/master/CodingTest/BinarySearch)
+# 5. [BinarySearch](https://github.com/ummsonny/ProblemSolving/tree/master/CodingTest/BinarySearch)
 # 6. [DP](https://github.com/ummsonny/ProblemSolving/tree/master/CodingTest/DP)
 # 7. [LeastRoute](https://github.com/ummsonny/ProblemSolving/tree/master/CodingTest/LeastRoute)
 # 9. [Tip](https://github.com/ummsonny/ProblemSolving/tree/master/CodingTest/CareFulPoint)
