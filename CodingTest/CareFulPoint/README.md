@@ -117,7 +117,7 @@ def dfs(x,y,united):
 ```python
 def right_rot90(a):#시계방향 90도 회전
     n = len(a) # 행
-    m - len(a[0]) # 열
+    m = len(a[0]) # 열
     new_a = [[0]*n for _ in range(m)]
     for i in range(n):
         for j in range(m):
@@ -128,7 +128,7 @@ def right_rot90(a):#시계방향 90도 회전
 ```python
 def left_rot90(a):#반시계방향 90도 회전
     n = len(a) # 행
-    m - len(a[0]) # 열
+    m = len(a[0]) # 열
     new_a = [[0]*n for _ in range(m)]
     for i in range(n):
         for j in range(m):

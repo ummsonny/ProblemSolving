@@ -12,7 +12,7 @@ def balanced_index(p): # 균형잡힌 문자열의 인덱스 반환
 def check_proper(p): # 올바른 문자열
     count = 0 # 왼쪽 괄호의 개수
     for i in p:
-        if p == '(':
+        if i == '(':
             count +=1
         else:
             if count == 0: # 남는 '('가 없자나 그래서 짝을 못 지음
@@ -48,4 +48,49 @@ def solution(p): #균잡 -> 올바른 으로 바꾸는 함수임을 기억!
     return answer
 
 print(solution("()))((()"))
+
+# 내 풀이
+input_str = input()
+
+
+def first(input_str): # 균형잡힌 문자열 반환
+    count=0
+    for i in range(len(input_str)):
+        if input_str[i]=="(":
+            count+=1
+        else:
+            count-=1
+
+        if count==0:
+            return i
+
+def second(input_str):
+    count=0
+    for i in range(len(input_str)):
+        if input_str[i]=="(":
+            count+=1
+        else:
+            if count == 0:
+                return False
+            count-=1
+    return True
+
+def solution(input_str):
+
+    if input_str=="":
+        return ""
+
+    answer = ""
+    proper = first(input_str)
+    if second(input_str[:proper+1]):
+        answer = input_str[:proper+1]+solution(input_str[proper+1:])
+    else:
+        answer+="("
+        answer+=solution(input_str[proper+1:])
+        answer+=")"
+        answer+="".join(list(map(lambda x : ")" if x=="(" else "(",input_str[1:proper])))
+    
+    return answer
+
+print(solution(input_str))
     

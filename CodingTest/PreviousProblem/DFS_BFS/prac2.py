@@ -59,4 +59,60 @@ def dfs(count): # 내가 이전에 생각한 dfs랑 좀 다른 유형의 dfs ***
 dfs(0)
 print(result)
 
+# 내풀이
+from collections import deque
+n,m = map(int, input().split())
+
+graph = []
+template = [[0]*m for _ in range(n)]
+virus = []
+for i in range(n):
+    graph.append(list(map(int, input().split())))
+    for j in range(m):
+        if graph[i][j]==2:
+            virus.append((i,j))
+# 바이러스 퍼짐
+dx = [-1,1,0,0]
+dy = [0,0,-1,1]
+def dfs2(x,y):
+    for i in range(4):
+        nx = x+dx[i]
+        ny = y+dy[i]
+        if 0<=nx<n and 0<=ny<m and template[nx][ny]==0:
+            template[nx][ny]=2
+            dfs2(nx,ny)
+            # print(1)
+
+def get_score():
+    cnt=0
+    for i in range(n):
+        for j in range(m):
+            if template[i][j]==0:
+                cnt+=1
+    return cnt
+
+# 경우의 수 3가지 뽑기
+result = 0
+def dfs(count,sx,sy):
+    global result
+
+    if count==3:
+        for i in range(n):
+            for j in range(m):
+                template[i][j]=graph[i][j]
+        for vx,vy in virus:
+            dfs2(vx,vy)
+        result = max(result, get_score())
+        return
+
+    for i in range(sx,n):
+        sy = sy if i==sx else 0
+        for j in range(sy,m):
+            if graph[i][j]==0:
+                graph[i][j]=1
+                dfs(count+1,sx,sy+1)
+                graph[i][j]=0
+
+dfs(0,0,0)
+print(result)
     
