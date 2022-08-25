@@ -78,3 +78,63 @@ if find:
 else:
     print('NO')
 
+# 내풀이 -> combination 라이브러리 안씀 DFS로 푼거임
+n = int(input())
+graph = []
+teacher = []
+
+for i in range(n):
+    graph.append(list(input().split()))
+    for j in range(n):
+        if graph[i][j]=='T':
+            teacher.append((i,j))
+
+dx = [-1,1,0,0]
+dy = [0,0,1,-1]
+
+def check(x,y,direction):
+
+    while 0<=x<n and 0<=y<n:
+
+        if graph[x][y]=='S':
+            return True
+        if graph[x][y]=='O':
+            return False
+
+        x = x+dx[direction]
+        y = y+dy[direction]
+
+    return False
+
+def find():
+
+    for x,y in teacher:
+        for i in range(4):
+            if check(x,y,i):
+                return True
+
+    return False
+
+answer = True
+def dfs(sx,sy,count):
+    global answer
+
+    if count ==3:
+
+        if find()==False:
+            answer = False
+        return
+
+    for i in range(sx,n):
+        sy = sy if sx==0 else 0
+        for j in range(sy,n):
+            if graph[i][j]=='X':
+                graph[i][j]='O'
+                dfs(sx,sy+1,count+1)
+                graph[i][j]='X'
+dfs(0,0,0)
+
+if answer:
+    print('NO')
+else:
+    print('YES')
