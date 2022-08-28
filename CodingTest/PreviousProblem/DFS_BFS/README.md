@@ -45,16 +45,16 @@ def dfs(x,y,united):
 ```python
 
 if len(united) > 1:
-                result +=1
-                #flag=True
-                summary = 0
-                for a,b in united:
-                   summary+=graph[a][b]
-                #united_people = people//country
-                length = len(united)
-                avg = summary//length
-                for a,b in united:
-                    graph[a][b] = avg #united_people
+    result +=1
+    #flag=True
+    summary = 0
+    for a,b in united:
+        summary+=graph[a][b]
+    #united_people = people//country
+    length = len(united)
+    avg = summary//length
+    for a,b in united:
+        graph[a][b] = avg #united_people
 
 ```
 ---
@@ -71,4 +71,14 @@ for a,b in united: # 권장
 ---
 
 우선순위 4. 3번에서 result를 써도 안봐도 되는 부분은 안봐서 통과했는데 result도 '+'연산을 하기때문에 시간 잡아먹음 그래서 flag를 쓰면 더 괜춘
+
+---
+우선순위 5. 반복되는 계산값은 변수에 담아 사용!
+```python
+    
+    # '//' 연산을 반복문을 돌때마다 계산하기보다는 이렇게 변수에 담으면
+    # 연산을 1번만 하면 된다.
+    avg = people//country
+
+```
 
