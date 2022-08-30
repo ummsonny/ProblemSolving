@@ -13,20 +13,20 @@ def get_next_position(pos, board):
         pos1_next_x, pos1_next_y, pos2_next_x, pos2_next_y = pos1_x+dx[i], pos1_y+dy[i], pos2_x+dx[i], pos2_y+dy[i]
 
         if board[pos1_next_x][pos1_next_y] == 0 and board[pos2_next_x][pos2_next_y] ==0:
-            next_pos.append(((pos1_next_x, pos1_next_y),(pos2_next_x, pos2_next_y)))
+            next_pos.append({(pos1_next_x, pos1_next_y),(pos2_next_x, pos2_next_y)})
 
     # 회전
     if pos1_x==pos2_x: #로봇이 가로로 있는 경우
         for i in [-1,1]:
             if board[pos1_x+i][pos1_y] == 0 and board[pos2_x+i][pos2_y]==0:
-                next_pos.append(((pos1_x,pos1_y), (pos1_x+i, pos1_y)))
-                next_pos.append(((pos2_x,pos2_y), (pos2_x+i, pos2_y)))
+                next_pos.append({(pos1_x,pos1_y), (pos1_x+i, pos1_y)})
+                next_pos.append({(pos2_x,pos2_y), (pos2_x+i, pos2_y)})
 
     elif pos1_y == pos2_y: #로봇이 세로로 있는 경우
         for i in [-1,1]:
             if board[pos1_x][pos1_y+i] == 0 and board[pos2_x][pos2_y+i]==0:
-                next_pos.append(((pos1_x,pos1_y), (pos1_x, pos1_y+i)))
-                next_pos.append(((pos2_x,pos2_y), (pos2_x, pos2_y+i)))
+                next_pos.append({(pos1_x,pos1_y), (pos1_x, pos1_y+i)})
+                next_pos.append({(pos2_x,pos2_y), (pos2_x, pos2_y+i)})
 
     return next_pos
 
@@ -40,7 +40,7 @@ def solution(board):
 
     q = deque()
     visited = []
-    pos = ((1,1),(1,2)) # 시작위치
+    pos = {(1,1),(1,2)} # 시작위치
     q.append((pos, 0))
     visited.append(pos) # 방문처리
 
