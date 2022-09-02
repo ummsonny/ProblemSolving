@@ -115,3 +115,55 @@ for i in range(n):
 
 print(result)
 '''
+# 내풀이 2
+n = int(input())
+favorite = []
+for _ in range(n*n):
+    favorite.append(list(map(int, input().split())))
+graph = [[0]*n for _ in range(n)]
+
+
+dx = [-1,1,0,0]
+dy = [0,0,1,-1]
+
+for student in favorite:
+    x,y = 0,0
+    like, empty = -1,-1
+
+    for i in range(n):
+        for j in range(n):
+            if graph[i][j]==0:
+                a,b = 0,0
+                for d in range(4):
+                    ni,nj = i+dx[d],j+dy[d]
+                    if 0<=ni<n and 0<=nj<n:
+                        if graph[ni][nj] in student[1:]:
+                            a+=1
+                        if graph[ni][nj] == 0:
+                            b+=1
+                if like<a:
+                    like = a
+                    empty = b
+                    x,y = i,j
+
+                elif like==a:
+                    if empty<b:
+                        empty = b
+                        x,y = i,j
+
+    graph[x][y]=student[0]
+
+answer = 0
+for student in favorite:
+
+    for x in range(n):
+        for y in range(n):
+            if graph[x][y]==student[0]:
+                cnt = 0
+                for i in range(4):
+                    nx, ny = x+dx[i], y+dy[i]
+                    if 0<=nx<n and 0<=ny<n and graph[nx][ny] in student[1:]:
+                        cnt+=1
+                if cnt >0:
+                    answer += 10**(cnt-1)
+print(answer)

@@ -39,8 +39,48 @@ while True:
     elif graph[x0-dx[direction]][y0-dy[direction]] == 1:
         break
 
-
+for g in visit:
+    print(g)
 print(result)
+
+# 개선
+n,m = map(int, input().split())
+r,c,d = map(int, input().split())
+
+graph = []
+for _ in range(n):
+    graph.append(list(map(int, input().split())))
+
+
+dx = [-1,0,1,0]
+dy = [0,1,0,-1]
+
+graph[r][c]=-1
+answer = 1
+
+while True:
+
+    flag = False
+    for i in range(4):
+        d = (d-1)%4
+        nr, nc = r + dx[d], c + dy[d]
+        if graph[nr][nc]==0:
+            r,c = nr,nc
+            graph[r][c]=-1
+            answer+=1
+            flag = True
+            break
+
+    if flag == False:
+        nr,nc = r-dx[d], c-dy[d]
+        if graph[nr][nc]!=1:
+            r,c = nr, nc
+        else:
+            break
+
+for g in graph:
+    print(g)
+print(answer)
 
 
 

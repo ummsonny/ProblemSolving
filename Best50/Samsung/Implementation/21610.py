@@ -14,7 +14,7 @@ for _ in range(m):
     d, s = map(int, input().split())
 
     #움직이자
-    for place in cloud:
+    for place in cloud: #place는 주소값이다! 그래서 바로 아래코드가 가능하다
         place[0] = (place[0] + dx[d-1]*s)%n
         place[1] = (place[1] + dy[d-1]*s)%n
 
