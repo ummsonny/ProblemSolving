@@ -85,6 +85,27 @@ def bfs(graph, start, visited):
                 visited[i]=True # 큐에 들어가 있을 때 방문이 된 상태여야 한다.
 
 #그래프 방법
+
+# 1. 방문체크(visit) 배열만 만드는 방법
+def bfs(x, y):
+
+    queue = deque()
+    queue.append((x, y))
+    visit[x][y] = True
+
+    while queue:
+        x, y = queue.popleft()
+
+        for i in range(4):
+            nx = x + dx[i]
+            ny = y + dy[i]
+            # 미로 찾기 공간을 벗어난 경우 X and 장애물 X 라면
+            if 0<=nx<n and 0<=ny<n and "장애물이 아니라면":
+                if visit[nx][ny] == False: 
+                    visit[nx][ny] = True
+                    queue.append((nx, ny))
+
+# 2. 방문체크와 거리를 한 번에 구현하는 방법
 def bfs(x, y):
 
     queue = deque()
@@ -100,12 +121,38 @@ def bfs(x, y):
             # 미로 찾기 공간을 벗어난 경우 X and 장애물 X 라면
             if 0<=nx<n and 0<=ny<n and "장애물이 아니라면":
                 # 해당 노드를 처음 방문하는 경우에만 최단 거리 기록 중요***********
-                if visit[nx][ny] == False: # graph[nx][ny] == 1:도 가능
+                if graph[nx][ny] == 0: # visit[nx][ny] == False: 도 가능 
                     graph[nx][ny] = graph[x][y] + 1 # 방문체크도 동시에 된다.
                     queue.append((nx, ny))
     # 가장 오른쪽 아래까지의 최단 거리 반환
     return graph[n - 1][m - 1]
 
+# 3. "특정 상태인 상황"에 거리를 구해야 하는 경우 - 17142번 참고
+# 방문체크배열 따로 생성 + "큐에 거리"를 넣는다.
+def bfs(leftarea):
+    visit = [[-1] * n for _ in range(n)]
+
+    q = deque(active_virus)
+    for x,y,z in active_virus:
+        visit[x][y]=2
+
+    while q:
+        a,b,time = q.popleft()
+
+        for i in range(4):
+            na,nb = a+dx[i], b+dy[i]
+            if 0<=na<n and 0<=nb<n and graph[na][nb]!=1:
+                if visit[na][nb]==-1:
+                    q.append((na,nb,time+1))
+                    visit[na][nb]=2
+
+                    if graph[na][nb]==0:
+                        leftarea-=1
+
+                        if leftarea==0:
+                            return time+1
+
+    return 1e9
 ```
 ---
 ## **그래프의형태**
