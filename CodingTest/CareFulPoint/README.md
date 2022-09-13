@@ -115,6 +115,8 @@ def dfs(x,y,united):
 
 - 시계방향 90도회전
 ```python
+
+# 배열 전체
 def right_rot90(a):#시계방향 90도 회전
     n = len(a) # 행
     m = len(a[0]) # 열
@@ -123,6 +125,17 @@ def right_rot90(a):#시계방향 90도 회전
         for j in range(m):
             new_a[j][n-1-i] = a[i][j]
     return new_a
+
+# 배열 일부분 - 20058 참고
+    temp = [[0]*(2**n) for _ in range(2**n)]
+    k = 2**L # 회전할 배열 크기
+    for i in range(0,2**n,k):
+        for j in range(0,2**n,k):
+            #회전규칙 적용
+            for x in range(k):
+                for y in range(k):
+                    temp[i+y][j+k-1-x] = graph[i+x][j+y] # 회전 규칙 적용 + 평행이동
+    graph = temp
 ```
 - 반시계방향 90도 회전
 ```python
@@ -136,6 +149,12 @@ def left_rot90(a):#반시계방향 90도 회전
     return new_a
 ```
 
+---
+## max, min 값 초기화
+1. 통상적으로 max = -1e9, min = 1e9 이렇게 잡는다.
+    - 하지만 이 경우는 항상 max, min 값이 **변한다**는 가정이 있어야 한다.
+2. 20058번 문제처럼 안 변하는 경우가 있다면 1번같이 하면 안된다.
+    - 이 경우는 max는 **나올 수 있는** 최소의 값으로, min은 **나올 수 있는** 최대의 값으로 잡아줘야한다.
 ---
 ## List, Set, Dict 자료형에 따른 시간 복잡도!
 ### [Reference](https://2dowon.netlify.app/python/data-type-big-o/) 꼭 참고해라!
