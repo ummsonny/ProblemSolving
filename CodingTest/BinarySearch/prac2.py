@@ -2,6 +2,7 @@ import re
 
 
 def binary_search(array, target, start, end):
+    result = 0
     while start<=end:
         mid = (start+end)//2
         
@@ -15,11 +16,10 @@ def binary_search(array, target, start, end):
         else:
             result = mid # total>=target이면 정답이 될 수 있으므로 저장해놓은다.
             start = mid+1
-    return mid
+    return result
 
 n, m = map(int, input().split())
 array = list(map(int, input().split()))
-array.sort()
 
 result = binary_search(array, m, 0, max(array))
 print(result)
