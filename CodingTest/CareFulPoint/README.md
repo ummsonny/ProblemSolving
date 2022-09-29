@@ -25,24 +25,11 @@ for step in steps:
 nx = x - dx[i]
 ny = y - dy[i]
 ```
-
----
-## 리스트
-
-1. 리스트 각 요소 빨리 바꾸기
+4. 21610처럼 마지막행은 1행, 마지막열은 1열과 연결되어 있다는 조건이 있다면 이동 시켜주고 행은 %n, 열은 %m 해준다.(만약 행이 n, 열이 m이라면)
 ```python
-#1.
-array = listmap(int, input().split()))
-#2.활용
-list(map(lambda x:'(' if x==')' else ')',p[1:i]))
+nx = (x + dx[d]*s)%n
+ny = (y + dy[d]*s)%m
 ```
-
-2. 요소가 배열인 2차원 배열 선언
-```python
-1. graph = [[[]]*n for _ in range(n)] --> 이건 요소의 주소값이 복사되어서 갱신 되면 한 행이 다 갱신 되므로 주의!!! 나중에 요소값 초기화 할때 ex) graph[i][j] = [1,3]처럼 배열로 초기화 해야함
-2. graph = [[[] for _ in range(n)] for _ in range(n)]
-```
-
 ---
 ## 변수의 범위
 - 파이썬은 **함수** 안에만 지역변수임 **while이나 for문**에서는 global변수쓰는거임
@@ -148,13 +135,64 @@ def left_rot90(a):#반시계방향 90도 회전
             new_a[m-1-j][i] = a[i][j]
     return new_a
 ```
+- 회전 시, 배열 안의 **특정 칸**을 기준으로 다른 칸까지의 차이 - 20057번 문제
+    - 시계방향 90도 회전 : (x,y) -> (y,x)
 
 ---
 ## max, min 값 초기화
 1. 통상적으로 max = -1e9, min = 1e9 이렇게 잡는다.
     - 하지만 이 경우는 항상 max, min 값이 **변한다**는 가정이 있어야 한다.
-2. 20058번 문제처럼 안 변하는 경우가 있다면 1번같이 하면 안된다.
+2. 20058번 문제처럼 min,max 값이 안 변할수도 있는 경우 -> 1번같이 하면 안된다.
     - 이 경우는 max는 **나올 수 있는** 최소의 값으로, min은 **나올 수 있는** 최대의 값으로 잡아줘야한다.
+3. 21608번 문제처럼 무조건 변하는 경우 -> 1번처럼 해도 된다.
 ---
+## 기차 혹은 뱀처럼 이어져 있는 칸 전진하기
+- 메커니즘
+    1. 머리 하나 추가
+    2. 꼬리 삭제
+---
+## 배열 중심부로부터 소용돌이
+```python
+dx = [0,1,0,-1] #좌,하,우,상
+dy = [-1,0,1,0]
+cx,cy,d = n//2,n//2,0
+step=0
+while True:
+    step+=1
+    if step < n:
+        for _ in range(2):
+            for _ in range(step):
+                cx,cy=cx+dx[d],cy+dy[d]
+                # 문제 요구 처리
+            d=(d+1)%4
+    else:
+        for _ in range(step-1):
+            cx,cy=cx+dx[d],cy+dy[d]
+            # 문제 요구 처리
+        break
+```
+---
+## 자료구조
+### deque
+1. rotate 함수
+    - rotate(1) : 오른쪽으로 리스트를 한 번 돌린다.
+    - rotate(-1) : 왼쪽으로 리스트를 한 번 돌린다.
+
+### 리스트
+
+1. 리스트 각 요소 빨리 바꾸기
+```python
+#1.
+array = listmap(int, input().split()))
+#2.활용
+list(map(lambda x:'(' if x==')' else ')',p[1:i]))
+```
+
+2. 요소가 배열인 2차원 배열 선언
+```python
+1. graph = [[[]]*n for _ in range(n)] --> 이건 요소의 주소값이 복사되어서 갱신 되면 한 행이 다 갱신 되므로 주의!!! 나중에 요소값 초기화 할때 ex) graph[i][j] = [1,3]처럼 배열로 초기화 해야함
+2. graph = [[[] for _ in range(n)] for _ in range(n)]
+```
 ## List, Set, Dict 자료형에 따른 시간 복잡도!
+
 ### [Reference](https://2dowon.netlify.app/python/data-type-big-o/) 꼭 참고해라!

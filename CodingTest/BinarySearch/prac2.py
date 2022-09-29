@@ -1,6 +1,3 @@
-import re
-
-
 def binary_search(array, target, start, end):
     result = 0
     while start<=end:
