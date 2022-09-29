@@ -153,23 +153,69 @@ def left_rot90(a):#반시계방향 90도 회전
 ---
 ## 배열 중심부로부터 소용돌이
 ```python
-dx = [0,1,0,-1] #좌,하,우,상
-dy = [-1,0,1,0]
-cx,cy,d = n//2,n//2,0
-step=0
-while True:
-    step+=1
-    if step < n:
-        for _ in range(2):
-            for _ in range(step):
-                cx,cy=cx+dx[d],cy+dy[d]
-                # 문제 요구 처리
-            d=(d+1)%4
-    else:
-        for _ in range(step-1):
-            cx,cy=cx+dx[d],cy+dy[d]
-            # 문제 요구 처리
-        break
+# dxc = [-1,0,1,0] #상우하좌 or 상좌하우
+# dyc = [0,1,0,-1]
+# dxc = [0,-1,0,1] #좌상우하 or 좌하우상
+# dyc = [-1,0,1,0]
+dxc = [1,0,-1,0] #하좌상우 or 하우상좌
+dyc = [0,-1,0,1]
+# dxc = [0,1,0,-1] #우하좌상 or 우상좌하
+# dyc = [1,0,-1,0]
+def makeroute():
+
+    # 술래 움직이는 경로 먼저 만들어 주자
+    route = [] #위치 및 방향
+    cx,cy = n//2,n//2
+    d,step = 0,1
+    while True:
+        for _ in range(step):
+            route.append((cx,cy,d))
+            cx,cy = cx+dxc[d],cy+dyc[d]
+
+        if not(0<=cx<n and 0<=cy<n):
+            break
+
+        d = (d+1)%4
+        if d==0 or d==2: # 위에 8가지 경우 다 됨
+            step+=1
+
+    return route
+```
+## 끝 찍고 다시 돌아오기
+```python
+# dxc = [-1,0,1,0] #상우하좌 or 상좌하우
+# dyc = [0,1,0,-1]
+# dxc = [0,-1,0,1] #좌상우하 or 좌하우상
+# dyc = [-1,0,1,0]
+dxc = [1,0,-1,0] #하좌상우 or 하우상좌
+dyc = [0,-1,0,1]
+# dxc = [0,1,0,-1] #우하좌상 or 우상좌하
+# dyc = [1,0,-1,0]
+def makeroute():
+
+    # 술래 움직이는 경로 먼저 만들어 주자
+    route = [] #위치 및 방향
+    cx,cy = n//2,n//2
+    d,step = 0,1
+    while True:
+        for _ in range(step):
+            route.append((cx,cy,d))
+            cx,cy = cx+dxc[d],cy+dyc[d]
+
+        if not(0<=cx<n and 0<=cy<n):
+            break
+
+        d = (d+1)%4
+        if d==0 or d==2: # 위에 8가지 경우 다 됨
+            step+=1
+
+    route_re = []
+    length = len(route)
+    for x,y,d in route[:-1][::-1]:
+        route_re.append((x+dxc[d],y+dyc[d],(d+2)%4))
+    route = route[:-1]+route_re
+
+    return route
 ```
 ---
 ## 자료구조
