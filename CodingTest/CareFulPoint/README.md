@@ -216,6 +216,26 @@ def makeroute():
     route = route[:-1]+route_re
 
     return route
+
+# 이거는 다른 버전인데 뭔가 움직일 때마다 바로바로 무슨 처리 하기가 편한 코드이다. 위에있는 첫번째 버전은 루트를 만들어주는게 핵심이라면 이거는 옮길때마다 처리하는게 핵심인 코드인 듯
+dx = [0,1,0,-1]
+dy = [-1,0,1,0]
+cx,cy= n//2,n//2
+d,step=0,0
+
+while True:
+    step+=1
+    if step < n:
+        for _ in range(2):
+            for _ in range(step):
+                cx,cy=cx+dx[d],cy+dy[d]
+                send(cx,cy,d)
+            d=(d+1)%4
+    else:
+        for _ in range(step-1):
+            cx,cy=cx+dx[d],cy+dy[d]
+            send(cx,cy,d)
+        break
 ```
 ---
 ## 자료구조
