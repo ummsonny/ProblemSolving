@@ -259,6 +259,16 @@ list(map(lambda x:'(' if x==')' else ')',p[1:i]))
 1. graph = [[[]]*n for _ in range(n)] --> 이건 요소의 주소값이 복사되어서 갱신 되면 한 행이 다 갱신 되므로 주의!!! 나중에 요소값 초기화 할때 ex) graph[i][j] = [1,3]처럼 배열로 초기화 해야함
 2. graph = [[[] for _ in range(n)] for _ in range(n)]
 ```
+
+3. dfs할 때 상태 보존 시, 위 2번과 같은 개념으로 주소값이 복사 되지 않게 초기화해줘야함
+```python
+#19236 문제의 dfs안에서 상태 보존시!
+
+temp[a][b]=[graph[a][b][0],graph[a][b][1]] # temp[a][b]=graph[a][b] 안됨! graph[a][b]가 배열이라 같은 주소값을 참고함
+
+fishtemp[idx]=[fish[idx][0],fish[idx][1]] # 여기도 위에랑 같은 이유로 이렇게 복사해줘야함
+
+```
 ## List, Set, Dict 자료형에 따른 시간 복잡도!
 
 ### [Reference](https://2dowon.netlify.app/python/data-type-big-o/) 꼭 참고해라!
