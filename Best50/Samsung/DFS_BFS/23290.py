@@ -102,3 +102,152 @@ for _ in range(s):
 
 answer = len(fishes)
 print(answer)
+
+# 또 다른 내 풀이
+from collections import deque
+
+m, s = map(int, input().split())
+graph = [[[] for _ in range(4)] for _ in range(4)]  # 물고기 정보
+smell = [[0] * 4 for _ in range(4)]
+
+for _ in range(m):
+    x, y, d = map(int, input().split())
+    graph[x - 1][y - 1].append(d - 1)
+sharkx, sharky = map(lambda x: int(x) - 1, input().split())
+
+dx = [0, -1, -1, -1, 0, 1, 1, 1]
+dy = [-1, -1, 0, 1, 1, 1, 0, -1]
+
+
+def changedirection(d):
+    return (d - 1) % 8
+
+
+def movefish():
+    temp = [[[] for _ in range(4)] for _ in range(4)]
+
+    for i in range(4):
+        for j in range(4):
+            if graph[i][j]:
+                for d in graph[i][j]:
+                    flag = False
+                    for _ in range(8):
+                        nx, ny = i + dx[d], j + dy[d]
+                        if not (0 <= nx < 4 and 0 <= ny < 4):
+                            d = changedirection(d)
+                            continue
+                        if nx == sharkx and ny == sharky:
+                            d = changedirection(d)
+                            continue
+                        if smell[nx][ny]:
+                            d = changedirection(d)
+                            continue
+                        temp[nx][ny].append(d)
+                        flag = True
+                        break
+
+                    if not flag:
+                        temp[i][j].append(d)
+
+    return temp
+
+
+def movefish2():  # d 처리하는 부분이 movefish보다 좀더 직관적이다
+
+    temp = [[[] for _ in range(4)] for _ in range(4)]
+
+    for i in range(4):
+        for j in range(4):
+            if graph[i][j]:
+                for d in graph[i][j]:
+                    flag = False
+                    for k in range(8):
+                        nx, ny = i + dx[(d - k) % 8], j + dy[(d - k) % 8]
+                        if not (0 <= nx < 4 and 0 <= ny < 4):
+                            continue
+                        if nx == sharkx and ny == sharky:
+                            continue
+                        if smell[nx][ny]:
+                            continue
+                        temp[nx][ny].append((d - k) % 8)
+                        flag = True
+                        break
+
+                    if not flag:
+                        temp[i][j].append(d)
+
+    return temp
+
+
+dxs = [-1, 0, 1, 0]
+dys = [0, -1, 0, 1]
+
+
+def moveshark(x, y, count, eat, candi):
+    global result, result_candi, sharkx, sharky
+
+    if count == 3:
+        if result < eat:
+            result = eat
+            result_candi = candi
+            sharkx, sharky = x, y  # 3번 움직였을때 들어온 매개변수 x,y가 상어의 마지막 위치다!!!!!!
+        return
+
+    for i in range(4):
+        nx, ny = x + dxs[i], y + dys[i]
+        if 0 <= nx < 4 and 0 <= ny < 4:
+            if not ate[nx][ny]:
+                ate[nx][ny] = 1
+                moveshark(nx, ny, count + 1, eat + len(graph[nx][ny]), candi + [(nx, ny)])
+                ate[nx][ny] = 0
+            else:
+                moveshark(nx, ny, count + 1, eat, candi + [(nx, ny)])
+
+
+for _ in range(s):
+
+    # 복제
+    fish = deque([])
+    for a in range(4):
+        for b in range(4):
+            if graph[a][b]:
+                for d in graph[a][b]:
+                    fish.append((a, b, d))
+
+    # 물고기 이동
+    graph = movefish2()
+
+    # 상어 이동
+    result = -1  # 상어가 물고기를 못먹고 이동만 할 수도 있자나
+    result_candi = []
+    ate = [[0] * 4 for _ in range(4)]
+    moveshark(sharkx, sharky, 0, 0, [])
+
+    # 위에 moveshark()의 종료조건에서 이미 처리해줫다
+    # 근데 아래 방법이 시간은 더 빠르다
+    # sharkx,sharky = result_candi[-1][0],result_candi[-1][1]
+
+    # 냄새 사라짐
+    for a in range(4):
+        for b in range(4):
+            if smell[a][b]:
+                smell[a][b] -= 1
+    # 냄새 살포
+    for x, y in result_candi:
+        if graph[x][y]:
+            graph[x][y] = []
+            smell[x][y] = 2  # 여기를 3으로하고 # 냄새 사라짐과 위치 바꿔도 된다.
+
+    # 복제 완료
+    for a, b, d in fish:
+        graph[a][b].append(d)
+
+    # for g in graph:
+    #     print(g)
+    # print(sharkx,sharky)
+
+answer = 0
+for x in range(4):
+    for y in range(4):
+        answer += len(graph[x][y])
+print(answer)

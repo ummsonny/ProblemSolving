@@ -127,7 +127,7 @@ dx = [-1,1,0,0]
 dy = [0,0,1,-1]
 
 for student in favorite:
-    x,y = 0,0
+    x,y = 0,0 # 이 값은 무조건 갱신되기 때문에 x,y = -1,-1 x,y = -1e9,-1e9 등 범위에 없는 값으로 초기화 해놔도 된다.
     like, empty = -1,-1
 
     for i in range(n):

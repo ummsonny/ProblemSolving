@@ -15,7 +15,7 @@ max_result = -1e9
 def dfs_4(x,y,count,result):
     global max_result
 
-    if count == 4:
+    if count == 3:
         max_result = max(max_result, result)
         return
 
@@ -32,7 +32,7 @@ for i in range(n):
     for j in range(m):
         # visit = [[0] * n for _ in range(m)] --> 이렇게 하면 시간초과난다. 그래서
         visit[i][j] = 1
-        dfs_4(i,j,0,0)
+        dfs_4(i,j,0,graph[i][j])
         visit[i][j] = 0
 
 #이제 5번 블록

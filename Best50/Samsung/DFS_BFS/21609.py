@@ -134,3 +134,235 @@ while True:
     do_gravity()
     graph = rot90(graph)
     do_gravity()
+
+# 내 풀이 1
+n, m = map(int, input().split())
+graph = []
+for _ in range(n):
+    graph.append(list(map(int, input().split())))
+
+dx = [-1, 1, 0, 0]
+dy = [0, 0, -1, 1]
+
+
+def dfs(x, y, color, group, visit):
+    visit[x][y] = 1
+    group.append((x, y))
+
+    for i in range(4):
+        nx, ny = x + dx[i], y + dy[i]
+        if not (0 <= nx < n and 0 <= ny < n):
+            continue
+        if visit[nx][ny] == -1:
+            if graph[nx][ny] == 0 or graph[nx][ny] == color:  # 무지개 블록 or 일반블록
+                dfs(nx, ny, color, group, visit)
+
+
+def findgroup():
+    # 그룹을 찾기 -> 즉 글로벌 변수들이 필요하다
+    blocks = []  # 그룹 블록들
+    block_cnt = 0  # 그룹 블록 개수
+    rainbowblock = -1  # 무지개 블록 개수
+    sx, sy = -1, -1  # 기준 블록 좌표
+
+    for i in range(n):
+        for j in range(n):
+            visit = [[-1] * n for _ in range(n)] # 만약 같은 0(무지개)를 다른 일반 블록이 동시에 접근할 수 도 있으므로
+
+            if graph[i][j] > 0 and visit[i][j] == -1:
+                flag = False
+
+#=================================================================
+                # 아래 세가지 변수 구하는 과정 -> 위 글로벌 변수들과 비교하기 위해서는 같은 종류의 지역 변수가 필요하다.
+                group = []  # 그룹 블록들
+                rainbowcnt = 0  # 무지개 블록 개수
+                cx, cy = n, n  # 기준 블록 좌표
+
+                dfs(i, j, graph[i][j], group, visit)
+                length = len(group)
+                if length < 2: continue
+
+                # 무지개 블록이랑 기준 좌표 구하기
+                for a, b in group:
+                    if graph[a][b] == 0:
+                        rainbowcnt += 1
+                    else:
+                        if cx > a:
+                            cx, cy = a, b
+                        elif cx == a:
+                            if cy > b:
+                                cx, cy = a, b
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++==
+
+                if length > block_cnt:  # 만약 더 큰 블록이라면
+                    flag = True
+
+                elif length == block_cnt:  # 만약 같다면
+
+                    if rainbowblock < rainbowcnt:
+                        flag = True
+                    elif rainbowblock == rainbowcnt:
+                        if sx < cx:
+                            flag = True
+                        elif sx == cx:
+                            if sy < cy:
+                                flag = True
+                if flag:
+                    blocks = group
+                    block_cnt = length
+                    rainbowblock = rainbowcnt
+                    sx, sy = cx, cy
+    return blocks,block_cnt
+
+
+def gravity(graph):
+    for i in range(n - 1, -1, -1):
+        for j in range(n):
+            if graph[i][j] >= 0:  # 검은색 블록이 아니라면
+                ni, nj = i, j
+                while True:
+                    ni, nj = ni + 1, nj
+                    if ni >= n or graph[ni][nj] >= -1:  # 경계 나가거나 다른블록 만나면
+                        ni, nj = ni - 1, nj
+                        break
+                graph[ni][nj], graph[i][j] = graph[i][j], graph[ni][nj]
+
+
+def turn_left(graph):
+    n = len(graph)
+    m = len(graph[0])
+    new_graph = [[0] * n for _ in range(m)]
+    for i in range(n):
+        for j in range(m):
+            new_graph[m - j - 1][i] = graph[i][j]
+    return new_graph
+
+
+answer = 0
+while True:
+    candidate,length = findgroup()
+
+    if length < 2:
+        print(answer)
+        exit(0)
+
+    answer += length ** 2  # 점수 획득
+    for a, b in candidate:
+        graph[a][b] = -2  # 빈칸
+
+    # 중력
+    gravity(graph)
+    # 회전
+    graph = turn_left(graph)
+    # 중력
+    gravity(graph)
+
+#내 풀이 2 : 풀이 1이랑 별 차이 없다
+dx = [-1,1,0,0]
+dy = [0,0,-1,1]
+def makegroup(x,y,color,visit,blocks):
+    visit[x][y]=1
+    blocks.append((x,y))
+
+    for d in range(4):
+        nx,ny = x+dx[d],y+dy[d]
+        if 0<=nx<n and 0<=ny<n and not visit[nx][ny]:
+            if graph[nx][ny]==0 or graph[nx][ny]==color:
+                makegroup(nx,ny,color,visit,blocks)
+
+
+def findgroup():
+    standardgroup = []
+    scount = 0
+    srainbow = 0
+    sblockx,sblocky = -1,-1
+
+    for i in range(n):
+        for j in range(n):
+            if graph[i][j]>0:
+                visit = [[0]*n for _ in range(n)]
+                blocks = []
+                makegroup(i,j,graph[i][j],visit,blocks)
+
+                if len(blocks)<2: continue
+
+                # 블록 그룹 정보 만들기
+                count=0
+                rainbow=0
+                blockx,blocky = int(1e9),int(1e9)
+                for x,y in blocks:
+                    count+=1
+                    if graph[x][y]==0:
+                        rainbow+=1
+                    else:
+                        if x<blockx:
+                            blockx,blocky = x,y
+                        elif x==blockx:
+                            if y<blocky:
+                                blockx,blocky=x,y
+
+                # 글로벌 블록 그룹 찾기
+                flag = False
+                if scount<count:
+                    flag = True
+                elif scount==count:
+                    if srainbow<rainbow:
+                        flag = True
+                    elif srainbow==rainbow:
+                        if sblockx<blockx:
+                            flag = True
+                        elif sblockx==blockx:
+                            if sblocky<blocky:
+                                flag = True
+                if flag:
+                    standardgroup = blocks
+                    scount = count
+                    srainbow = rainbow
+                    sblockx, sblocky = blockx,blocky
+
+    return standardgroup,scount
+
+def removeblocks(group,count):
+    global answer
+    for x,y in group:
+        graph[x][y]=-10
+    answer += count**2
+
+def gravity():
+    for i in range(n-1,-1,-1):
+        for j in range(n):
+            if graph[i][j]>-1:
+                cx,cy = i,j
+                while True:
+                    nx,ny = cx+1,cy
+                    if nx>=n:
+                        graph[cx][cy],graph[i][j]=graph[i][j],graph[cx][cy]
+                        break
+                    if graph[nx][ny]!=-10:
+                        graph[cx][cy],graph[i][j]=graph[i][j],graph[cx][cy]
+                        break
+                    cx,cy = nx,ny
+def rotate(graph):
+    new_graph = [[0]*n for _ in range(n)]
+    for i in range(n):
+        for j in range(n):
+            new_graph[n-1-j][i] = graph[i][j]
+    return new_graph
+
+n,m = map(int, input().split())
+graph = []
+for _ in range(n):
+    graph.append(list(map(int, input().split())))
+
+answer = 0
+while True:
+    arr,cnt = findgroup()
+
+    if not cnt:
+        print(answer)
+        break
+
+    removeblocks(arr,cnt)
+    gravity()
+    graph = rotate(graph)
+    gravity()
