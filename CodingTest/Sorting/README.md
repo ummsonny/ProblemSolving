@@ -216,3 +216,39 @@ print(result)
 ## 추가사항
 - 병합 정렬은 일반적으로 퀵 정렬보다는 느리다.
 
+---
+## C++ 정렬 라이브러리
+```c++
+// 내림차순 방법 3가지
+// 1.
+std::sort(arr.begin(), arr.end(), [](int a, int b) { return a > b; }); // 내림차순
+
+// 2.
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <functional> // std::greater를 사용하기 위한 헤더
+
+int main() {
+    std::vector<int> arr = {5, 3, 1, 4, 2};
+
+    // 내림차순으로 정렬
+    std::sort(arr.begin(), arr.end(), std::greater<int>());
+ 
+    return 0;
+}
+
+// 3.
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int main() {
+    std::vector<int> arr = {5, 3, 1, 4, 2};
+    std::sort(arr.rbegin(), arr.rend()); // 내림차순 정렬
+    for (int num : arr) std::cout << num << " "; // 출력: 5 4 3 2 1
+}
+
+
+
+```
