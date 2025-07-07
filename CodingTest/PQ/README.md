@@ -1,5 +1,5 @@
 # Priority Queue
-## 1. ±âº» ÀÚ·áÇü
+## 1. ï¿½âº» ï¿½Ú·ï¿½ï¿½ï¿½
 
 ```c++
 #include <iostream>
@@ -9,8 +9,8 @@
 using namespace std;
 
 int main(){
-    priority_queue<int> pq; // µğÆúÆ®°¡ ¿À¸§Â÷¼ø
-    //priority_queue<int, vector<int>, greater<int>> pq; // ³»¸²Â÷¼ø È¤Àº ÆÄÀÌ½ãÃ³·³ À½¼ö·Î ³Ö´Â¹æ¹ı
+    priority_queue<int> pq; // ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    //priority_queue<int, vector<int>, greater<int>> pq; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È¤ï¿½ï¿½ ï¿½ï¿½ï¿½Ì½ï¿½Ã³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Â¹ï¿½ï¿½
 
     pq.push(4);
     pq.push(7);
@@ -18,7 +18,7 @@ int main(){
     pq.push(1);
     pq.push(10);
 
-    cout << "¿ì¼±¼øÀ§ Å¥ »çÀÌÁî : " << pq.size() << "\n";
+    cout << "ï¿½ì¼±ï¿½ï¿½ï¿½ï¿½ Å¥ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ : " << pq.size() << "\n";
     
     while(!pq.empty()){
         cout << pq.top() << '\n';
@@ -30,7 +30,7 @@ int main(){
 }
 ```
 
-## 2. ±¸Á¶Ã¼ ¹× ³»ºÎ ¿¬»êÀÚ ¿À¹ö·Îµù
+## 2. ï¿½ï¿½ï¿½ï¿½Ã¼ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Îµï¿½
 ```c++
 #include <iostream>
 #include <queue>
@@ -46,7 +46,7 @@ struct Student
 
     Student(int num, int m, int e) : id(num), math(m), eng(e) {}
 
-    //ÇĞ¹ø ÀÛÀº°Ô ¿ì¼±¼øÀ§ ³ô´Ù.
+    //ï¿½Ğ¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ì¼±ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
     bool operator<(const Student s) const {
         return this->id > s.id;
     }
@@ -63,13 +63,13 @@ int main(){
     pq.push(Student(4,90,50));
     pq.push(Student(5,70,50));
 
-    cout << "¿ì¼±¼øÀ§ Å¥ »çÀÌÁî : " << pq.size() << "\n";
+    cout << "ï¿½ì¼±ï¿½ï¿½ï¿½ï¿½ Å¥ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ : " << pq.size() << "\n";
     
     while(!pq.empty()){
 
         Student ts = pq.top();
         pq.pop();
-        cout << "(ÇĞ¹ø, ¼öÇĞ, ¿µ¾î) : " << ts.id << ' ' << ts.math << ' ' << ts.eng << "\n";
+        cout << "(ï¿½Ğ¹ï¿½, ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½) : " << ts.id << ' ' << ts.math << ' ' << ts.eng << "\n";
     }
 
     return 0;
@@ -77,7 +77,7 @@ int main(){
 }
 ```
 
-## 3. cmp ±¸Á¶Ã¼
+## 3. cmp ï¿½ï¿½ï¿½ï¿½Ã¼
 
 ```c++
 #include <iostream>
@@ -98,10 +98,10 @@ struct Student
 
 struct cmp
 {
-    //ÇĞ¹ø Å«°Ô ¿ì¼±¼øÀ§ ³ô´Ù.
+    //ï¿½Ğ¹ï¿½ Å«ï¿½ï¿½ ï¿½ì¼±ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
     bool operator()(Student a, Student b){
         return a.id < b.id;
-        //return a.id > b.id; ¿À¸§Â÷¼ø
+        //return a.id > b.id; ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     }
 };
 
@@ -117,16 +117,25 @@ int main(){
     pq.push(Student(4,90,50));
     pq.push(Student(5,70,50));
 
-    cout << "¿ì¼±¼øÀ§ Å¥ »çÀÌÁî : " << pq.size() << "\n";
+    cout << "ï¿½ì¼±ï¿½ï¿½ï¿½ï¿½ Å¥ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ : " << pq.size() << "\n";
     
     while(!pq.empty()){
 
         Student ts = pq.top();
         pq.pop();
-        cout << "(ÇĞ¹ø, ¼öÇĞ, ¿µ¾î) : " << ts.id << ' ' << ts.math << ' ' << ts.eng << "\n";
+        cout << "(ï¿½Ğ¹ï¿½, ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½) : " << ts.id << ' ' << ts.math << ' ' << ts.eng << "\n";
     }
 
     return 0;
 
 }
 ```
+
+## ê¸°ì¶œ
+### í”„ë¡œê·¸ë˜ë¨¸ìŠ¤
+[ì´ì¤‘ìš°ì„ ìˆœìœ„í](https://school.programmers.co.kr/learn/courses/30/lessons/42628)
+<br>
+[ì•¼ê·¼ì§€ìˆ˜](https://school.programmers.co.kr/learn/courses/30/lessons/12927)
+<br>
+[ìˆ«ìê²Œì„](https://school.programmers.co.kr/learn/courses/30/lessons/12987)
+[ë””ìŠ¤í¬ ì»¨íŠ¸ë¡¤ëŸ¬](https://school.programmers.co.kr/learn/courses/30/lessons/42627)

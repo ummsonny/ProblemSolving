@@ -252,3 +252,9 @@ int main() {
 
 
 ```
+
+## 기출
+### 정렬은 아래문제 뿐만 아니라 그리디와 PQ문제도 풀자
+### 프로그래머스
+[인사고과](https://school.programmers.co.kr/learn/courses/30/lessons/152995)
+<br>

@@ -48,3 +48,16 @@
     - **So 확인(탐색)할 전체 데이터 개수(N)가 100만 개 이하일 때 적절**
 - **DFS 혹은 BFS로 해결**
     - **파이썬의 itertools 사용!!!!!!**
+---
+## 기출
+### 프로그래머스
+#### 완전 탐색(브루스포스)
+[외벽점검](https://school.programmers.co.kr/learn/courses/30/lessons/60062)
+<br>
+[자물쇠와 열쇠](https://school.programmers.co.kr/learn/courses/30/lessons/60059)
+<br>
+[뱀](https://www.acmicpc.net/problem/3190)
+<br>
+[기둥과 보 설치](https://school.programmers.co.kr/learn/courses/30/lessons/60061)
+<br>
+[치킨 배달](https://www.acmicpc.net/problem/15686)

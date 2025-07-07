@@ -81,6 +81,59 @@ for i in range(1, n + 1):
     else:
         print(distance[i])
 ```
+```c++
+// 프로그래머스 - 부대복귀
+#include <string>
+#include <vector>
+#include <queue>
+using namespace std;
+
+priority_queue<pair<int,int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
+int distances[100005];
+
+vector<int> solution(int n, vector<vector<int>> roads, vector<int> sources, int destination) {
+    
+    //초기화
+    vector<vector<int>> graph(n+1);
+    for(vector<int> road : roads){
+        graph[road[0]].push_back(road[1]);
+        graph[road[1]].push_back(road[0]);
+    }
+    
+    for(int i=1; i<=n; i++) distances[i]=200000;
+    distances[destination]=0;
+    pq.push({0, destination});
+    
+    while(!pq.empty()){
+        int dist = pq.top().first;
+        int node = pq.top().second;
+        pq.pop();
+
+        /*
+            거리가 같은 동일한 노드는 힙큐에 여러 개 있을 수 없다. 
+            아래 if(cost < distances[next]) 여기서 걸린다. 
+            그래서 바로 아래 코드에서 <=일 필요가없다.
+            또한 처음 시작노드때문이라도 <= 이면 안된다. 그럼 continue를 타게되서
+            while문을 아예 나가게 되어 알고리즘이 정상적으로 수행이 안됨.
+        */
+        if(distances[node]<dist) continue;
+        
+        for(int next : graph[node]){
+            int cost = dist + 1;
+            if(cost < distances[next]){
+                distances[next]=cost;
+                pq.push({cost, next});
+            }
+        }
+    }    
+    vector<int> answer;
+    for(int source : sources){
+        if(distances[source]==200000) answer.push_back(-1);
+        else answer.push_back(distances[source]);
+    }
+    return answer;
+}
+```
 ---
 ## 플로이드 워셜 알고리즘
 - N : N
