@@ -1,5 +1,5 @@
 # Priority Queue
-## 1. �⺻ �ڷ���
+## 1. 디폴트
 
 ```c++
 #include <iostream>
@@ -9,8 +9,8 @@
 using namespace std;
 
 int main(){
-    priority_queue<int> pq; // ����Ʈ�� ��������
-    //priority_queue<int, vector<int>, greater<int>> pq; // �������� Ȥ�� ���̽�ó�� ������ �ִ¹��
+    priority_queue<int> pq; // 기본이 최대힙
+    //priority_queue<int, vector<int>, greater<int>> pq; // 최소힙
 
     pq.push(4);
     pq.push(7);
@@ -18,7 +18,7 @@ int main(){
     pq.push(1);
     pq.push(10);
 
-    cout << "�켱���� ť ������ : " << pq.size() << "\n";
+    cout << "?��???? ? ?????? : " << pq.size() << "\n";
     
     while(!pq.empty()){
         cout << pq.top() << '\n';
@@ -30,7 +30,7 @@ int main(){
 }
 ```
 
-## 2. ����ü �� ���� ������ �����ε�
+## 2. 구조체 및 정렬 메서드 선언
 ```c++
 #include <iostream>
 #include <queue>
@@ -46,7 +46,6 @@ struct Student
 
     Student(int num, int m, int e) : id(num), math(m), eng(e) {}
 
-    //�й� ������ �켱���� ����.
     bool operator<(const Student s) const {
         return this->id > s.id;
     }
@@ -63,13 +62,13 @@ int main(){
     pq.push(Student(4,90,50));
     pq.push(Student(5,70,50));
 
-    cout << "�켱���� ť ������ : " << pq.size() << "\n";
+    cout << "?��???? ? ?????? : " << pq.size() << "\n";
     
     while(!pq.empty()){
 
         Student ts = pq.top();
         pq.pop();
-        cout << "(�й�, ����, ����) : " << ts.id << ' ' << ts.math << ' ' << ts.eng << "\n";
+        cout << "(?��?, ????, ????) : " << ts.id << ' ' << ts.math << ' ' << ts.eng << "\n";
     }
 
     return 0;
@@ -77,7 +76,7 @@ int main(){
 }
 ```
 
-## 3. cmp ����ü
+## 3. cmp 구조체 사용
 
 ```c++
 #include <iostream>
@@ -98,10 +97,9 @@ struct Student
 
 struct cmp
 {
-    //�й� ū�� �켱���� ����.
     bool operator()(Student a, Student b){
         return a.id < b.id;
-        //return a.id > b.id; ��������
+        //return a.id > b.id; 
     }
 };
 
@@ -117,13 +115,13 @@ int main(){
     pq.push(Student(4,90,50));
     pq.push(Student(5,70,50));
 
-    cout << "�켱���� ť ������ : " << pq.size() << "\n";
+    cout << "?��???? ? ?????? : " << pq.size() << "\n";
     
     while(!pq.empty()){
 
         Student ts = pq.top();
         pq.pop();
-        cout << "(�й�, ����, ����) : " << ts.id << ' ' << ts.math << ' ' << ts.eng << "\n";
+        cout << "(?��?, ????, ????) : " << ts.id << ' ' << ts.math << ' ' << ts.eng << "\n";
     }
 
     return 0;
@@ -135,7 +133,7 @@ int main(){
 ### 프로그래머스
 [이중우선순위큐](https://school.programmers.co.kr/learn/courses/30/lessons/42628)
 <br>
-[야근지수](https://school.programmers.co.kr/learn/courses/30/lessons/12927)
+[야근 지수](https://school.programmers.co.kr/learn/courses/30/lessons/12927)
 <br>
-[숫자게임](https://school.programmers.co.kr/learn/courses/30/lessons/12987)
+[숫자 게임](https://school.programmers.co.kr/learn/courses/30/lessons/12987)
 [디스크 컨트롤러](https://school.programmers.co.kr/learn/courses/30/lessons/42627)
