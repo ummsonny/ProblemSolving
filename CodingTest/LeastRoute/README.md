@@ -187,4 +187,21 @@ for a in range(1, n + 1):
             print(graph[a][b], end=" ")
     print()
 ```
+---
+## 기출
+### 프로그래머스
+#### BFS
+[가장 먼 노드](https://school.programmers.co.kr/learn/courses/30/lessons/49189)
+<br>
+[부대복귀](https://school.programmers.co.kr/learn/courses/30/lessons/132266)
+
+#### 다익스트라
+[부대복귀](https://school.programmers.co.kr/learn/courses/30/lessons/132266)(BFS풀이도 가능)
+<br>
+[경주로 건설](https://school.programmers.co.kr/learn/courses/30/lessons/67259)
+<br>
+[합승 택시 요금](https://school.programmers.co.kr/learn/courses/30/lessons/72413)
+
+#### 플로이드 와샬
+[순위](https://school.programmers.co.kr/learn/courses/30/lessons/49191)
 

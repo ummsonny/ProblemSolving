@@ -87,6 +87,47 @@ if count == 0:
 else:
     print(count)
 ```
+4. c++ 모듈(이진 탐색 라이브러리)
+<br>
+두 함수 모두 정렬된(**오름차순**) 컨테이너에서만 정확하게 동작
+- lower_bound(begin, end, value)
+
+    - value **이상(≥)**인 첫 번째 원소를 가리키는 이터레이터 반환
+
+- upper_bound(begin, end, value)
+
+    - value **초과(>)**하는 첫 번째 원소를 가리키는 이터레이터 반환
+
+- 용도
+    1. 정렬된 배열에서 값의 삽입 위치 찾기
+
+    2. 특정 값의 등장 범위 찾기
+
+        - count = upper_bound - lower_bound 로 개수 구하기
+
+    3. 중복된 값 처리 (equal_range와 비슷)
+```c++
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int main() {
+    std::vector<int> vec = {1, 2, 4, 4, 4, 5, 6};
+
+    auto lower = std::lower_bound(vec.begin(), vec.end(), 4);
+    auto upper = std::upper_bound(vec.begin(), vec.end(), 4);
+
+    std::cout << "lower_bound(4)의 인덱스: " << (lower - vec.begin()) << '\n';  // 2
+    std::cout << "upper_bound(4)의 인덱스: " << (upper - vec.begin()) << '\n';  // 5
+
+    std::cout << "lower_bound 값: " << *lower << '\n';  // 4
+    std::cout << "upper_bound 값: " << *upper << '\n';  // 5
+
+    return 0;
+}
+
+```
+
 ### when?
 - 코테에서 이진 탐색은 탐색 범위가 큰 상황에서 사용
 1. 탐색 범위가 **2000만**을 넘어가면 이진 탐색으로 접근!
@@ -125,3 +166,12 @@ print(input_data)
     - 단순히 특정 데이터가 존재하는지 검사할 때 매우 효과적인 방법
 ## 실전 문제 2
 - 파라메트릭 서치
+## 기출문제
+### 백준
+[공유기 설치](https://www.acmicpc.net/problem/2110)
+### 프로그래머스
+[입국심사](https://school.programmers.co.kr/learn/courses/30/lessons/43238)
+<br>
+[징검다리 건너기](https://school.programmers.co.kr/learn/courses/30/lessons/64062)
+<br>
+[선입 선출 스케줄링](https://school.programmers.co.kr/learn/courses/30/lessons/12920)

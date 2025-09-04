@@ -43,3 +43,11 @@
 [거스름돈](https://school.programmers.co.kr/learn/courses/30/lessons/12907)
 <br>
 [보행자 천국](https://school.programmers.co.kr/learn/courses/30/lessons/1832)
+<br>
+[풍선 터트리기](https://school.programmers.co.kr/learn/courses/30/lessons/68646)
+<br>
+[N으로 표현](https://school.programmers.co.kr/learn/courses/30/lessons/42895)
+<br>
+[카운트 다운](https://school.programmers.co.kr/learn/courses/30/lessons/131129)
+<br>
+[최적의 행렬 곱셈](https://school.programmers.co.kr/learn/courses/30/lessons/12942)

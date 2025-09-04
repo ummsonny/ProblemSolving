@@ -32,3 +32,5 @@
 [섬 연결하기](https://school.programmers.co.kr/learn/courses/30/lessons/42861)
 <br>
 [셔틀버스](https://school.programmers.co.kr/learn/courses/30/lessons/17678)
+<br>
+[스타 수열](https://school.programmers.co.kr/learn/courses/30/lessons/70130#)
